@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink, Switch, Route } from 'react-router-dom';
 
 import HomePage from './Resources/HomePage';
-import PeoplePage from './Resources/PeoplePage';
+import PeoplePage from './people/PeoplePage';
 //import Films from './Components/Films';
 // import Planets from './Components/Planets';
 // import Species from './Components/Species';
