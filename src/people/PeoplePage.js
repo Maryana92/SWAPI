@@ -10,9 +10,9 @@ const peopleColumnConfig = {
     title: 'Name',
     isSortable: true,
     isSearchable: true,
-    render: person => (
-      <Link to={`/people/${person.name}`}>{person.name}</Link>
-    ),
+    // render: person => (
+    //   <Link to={`/people/${person.name}`}>{person.name}</Link>
+    // ),
   },
   mass: {
     title: 'Mass',
@@ -46,26 +46,31 @@ const peopleColumnConfig = {
 
 class PeoplePage extends React.Component {
     state = {
+      isLoaded: false,
       people: [],
       config: peopleColumnConfig,
     };
   
     async componentDidMount() {
-      const people = getAll();
+      const people = await getAll();
   
-      this.setState({ people });
+      this.setState({ 
+        people,
+        isLoaded: true, });
+      console.log(people);
     }
   
     render () {
-      const { people, config } = this.state;
+      const { people, config, isLoaded } = this.state;
   
       return (
         <div className="App">
-          <h1>Datatable</h1>
+          <h1>PeoplePage</h1>
+          { isLoaded ? (
           <DataTable
             items={people}
             config={config}
-          />
+          />) : (<h1>Loading...</h1>)}
         </div>
       );
     }
