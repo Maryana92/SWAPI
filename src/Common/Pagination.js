@@ -2,13 +2,14 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const Pagination = ({ location, count, page = 1, perPage = 10 }) => {
-
-  const pagesCount = Math.ceil(count / perPage);
+const Pagination = ({
+  location, count, page = 1, perPage = 10,
+}) => {
+  const pageCount = Math.ceil(count / perPage);
   const pages = [];
 
-  for (let i = 0; i < pagesCount; i++) {
-    pages.push(i + 1);
+  for (let index = 0; index < pageCount; index++) {
+    pages.push(index + 1);
   }
 
   const getSearchWithPage = (page) => {
@@ -20,19 +21,20 @@ const Pagination = ({ location, count, page = 1, perPage = 10 }) => {
   };
 
   return (
-    <div className="Pagination">
+    <ul className="pagination">
       {pages.map(page => (
         <Link
+          className="page-item"
           key={page}
           to={{
             pathname: location.pathname,
-            search: getSearchWithPage(page),
+            search: location.search,
           }}
         >
           {page}
         </Link>
       ))}
-    </div>
+    </ul>
   );
 };
 

@@ -1,34 +1,36 @@
-import React, { Component } from 'react';
-import { NavLink, Route, Switch } from 'react-router-dom'
-import HomePage from './HomePage';
-import PeoplePage from './PeoplePage';
-import FilmsPage from './FilmsPage';
+import React from 'react';
+import { NavLink, Switch, Route } from 'react-router-dom';
 
-import './App.css';
+import HomePage from './Resources/HomePage';
+import PeoplePage from './Resources/PeoplePage';
+//import Films from './Components/Films';
+// import Planets from './Components/Planets';
+// import Species from './Components/Species';
 
-class App extends Component {
-  render() {
-    return (
-      <div>
-        <div className="App">
-          <h1>Star Wors</h1>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/people">People</NavLink>
-          <NavLink to="/fims">Films</NavLink>
-        </div>
-
-        <div>
-          <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route exact path="/people" component={PeoplePage} />
-            <Route exact path="/fims" component={FilmsPage} />
-            <Route render={ () => <h1>Page not found</h1> } />
-          </Switch>
-        </div>
-      </div>
-      
-    );
-  }
-}
-
+const App = () => (
+  <div className="App">
+    <header>
+      <h1 className="title">Star Wars</h1>
+    </header>
+    <nav className="NavLink">
+      <ul>
+        <li><NavLink className="NavLink-items" to="/">Home</NavLink></li>
+        <li><NavLink className="NavLink-items" to="/people">People</NavLink></li>
+        {/* <li><NavLink className="NavLink-items" to="/films">Films</NavLink></li>
+        <li><NavLink className="NavLink-items" to="/planets">Planets</NavLink></li>
+        <li><NavLink className="NavLink-items" to="/species">Species</NavLink></li> */}
+      </ul>
+    </nav>
+    <section>
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route exact path="/people" component={PeoplePage} />
+        {/* <Route exact path="/films" component={Films} />
+        <Route exact path="/planets" component={Planets} />
+        <Route exact path="/species" component={Species} />
+        <Route render={() => <div>Page not found</div>} /> */}
+      </Switch>
+    </section>
+  </div>
+);
 export default App;
