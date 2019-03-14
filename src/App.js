@@ -1,11 +1,16 @@
 import React from 'react';
 import { NavLink, Switch, Route } from 'react-router-dom';
-
-import HomePage from './Resources/HomePage';
+import HomePage from './home/HomePage'
 import PeoplePage from './people/PeoplePage';
+import PeopleDetailsPage from './people/PeopleDetailsPage';
+
+
 //import Films from './Components/Films';
 // import Planets from './Components/Planets';
 // import Species from './Components/Species';
+
+
+
 
 const App = () => (
   <div className="App">
@@ -25,6 +30,7 @@ const App = () => (
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/people" component={PeoplePage} />
+        <Route exact path="/people/:peopleId" component={PeopleDetailsPage} />
         {/* <Route exact path="/films" component={Films} />
         <Route exact path="/planets" component={Planets} />
         <Route exact path="/species" component={Species} />

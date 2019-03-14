@@ -2,6 +2,7 @@ import { get, getIdFromUrl } from './api';
 
 const BASE_URL = '/people'
 
+
 export const getAll = async () => {
   const { results } = await get(BASE_URL);
   

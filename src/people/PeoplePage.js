@@ -1,7 +1,9 @@
 import React from 'react';
 
 import DataTable from '../Common/DataTable';
-import { Link } from 'react-router-dom';
+import Pagination from '../Common/Pagination'
+
+import { NavLink } from 'react-router-dom';
 import { getAll } from '../api/people';
 
 const peopleColumnConfig = {
@@ -10,9 +12,9 @@ const peopleColumnConfig = {
     title: 'Name',
     isSortable: true,
     isSearchable: true,
-    // render: person => (
-    //   <Link to={`/people/${person.name}`}>{person.name}</Link>
-    // ),
+    render: person => (
+      <NavLink to={`/people/:${person.id}`}>{person.name}</NavLink>
+    ),
   },
   mass: {
     title: 'Mass',
@@ -20,6 +22,9 @@ const peopleColumnConfig = {
   },
   hair_color: {
     title: 'Hair Color',
+  },
+  skin_color: {
+    title: 'Skin Color',
   },
   birth_year: {
     title: 'Born',
@@ -37,9 +42,7 @@ const peopleColumnConfig = {
   homeworld: {
     title: 'Homeworld ',
   },
-  skin_color: {
-    title: 'Skin Color',
-  },
+  
 };
 
 
@@ -49,8 +52,42 @@ class PeoplePage extends React.Component {
       isLoaded: false,
       people: [],
       config: peopleColumnConfig,
+      count: 87,
+      page: 0,
     };
   
+
+    // componentDidMount() {
+    //   this.updatePageFromURL();
+    // }
+  
+    // componentDidUpdate() {
+    //   this.updatePageFromURL();
+    // }
+  
+    // updatePageFromURL() {
+    //   const { location } = this.props;
+    //   const urlParams = new URLSearchParams(location.search);
+    //   const page = +urlParams.get('page') || 1;
+  
+    //   if (page === this.state.page) {
+    //     return;
+    //   }
+  
+    //   this.setState({ page }, this.loadPeople);
+    // }
+  
+    
+  
+    //   async loadPeople() {
+    //     const people = await getAll();
+    
+    //     this.setState({ 
+    //       people,
+    //       isLoaded: true, });
+    //     console.log(people);
+    //   }
+
     async componentDidMount() {
       const people = await getAll();
   
@@ -61,16 +98,19 @@ class PeoplePage extends React.Component {
     }
   
     render () {
-      const { people, config, isLoaded } = this.state;
+      const { people, config, isLoaded, count, page  } = this.state;
   
       return (
         <div className="App">
           <h1>PeoplePage</h1>
           { isLoaded ? (
+            <>
+            <Pagination count={count} page={page} />
           <DataTable
             items={people}
             config={config}
-          />) : (<h1>Loading...</h1>)}
+          />
+          </>) : (<h1>Loading...</h1>)}
         </div>
       );
     }
